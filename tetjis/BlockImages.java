@@ -11,7 +11,7 @@ public class BlockImages {
     public static Image titleImage;
     public static Image finishImage;
 
-    public static void loadImages() {
+    static {
         blockImages[1] = loadImage("tetjis/data/image/1.png");
         for ( int i=2; i < NUM; i++ ) {
             blockImages[i] = loadImage("tetjis/data/image/" + i + ".png");

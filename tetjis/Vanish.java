@@ -46,6 +46,12 @@ public class Vanish implements Runnable{
         this.panel = frame;
     }
 
+
+    static{
+        makeDic();
+        makeCharList();
+    }
+
     public void threadSleep(int time) {
         try {
             Thread.sleep(time);
@@ -260,10 +266,5 @@ public class Vanish implements Runnable{
             e.printStackTrace();
             System.exit(-1);
         }
-    }
-
-    public static void loadData(){
-        makeDic();
-        makeCharList();
     }
 }

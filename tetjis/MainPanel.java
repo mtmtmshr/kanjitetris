@@ -30,8 +30,6 @@ public class MainPanel extends JPanel implements KeyListener, Runnable {
         this.holdBlockPanel = holdBlockPanel;
         this.scorePanel = scorePanel;
         this.difficulty = difficulty;
-
-        Vanish.loadData();
         Block.setDifficulty(difficulty);
         field = new Field();
         block = new Block(field);

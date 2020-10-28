@@ -21,8 +21,6 @@ public class Tetjis extends JFrame {
     private FinishPanel finishPanel;
     private Container contentPane = getContentPane();
     public Tetjis(){
-        GameSounds.loadSounds();
-        BlockImages.loadImages();
         scorePanel = new ScorePanel();
         nextBlockPanel = new NextBlockPanel();
         holdBlockPanel = new HoldBlockPanel();

@@ -3,6 +3,7 @@ package tetjis;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
@@ -16,9 +17,9 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class GameSounds implements Runnable {
     public static void main(String[] args) {
+
         // ここで再生メソッドの呼び出し
     }
-    private static Clip bgm;
     private static String bgmPath = "tetjis/data/bgm/tetrisb.mid";
     private static Clip[] se = new Clip[7];
     private static String[] sePathes = {"tetjis/data/se/cursor7.wav", "tetjis/data/se/excellent1.wav",
@@ -26,6 +27,13 @@ public class GameSounds implements Runnable {
                                         "tetjis/data/se/decision9.wav", "tetjis/data/se/kachi42.wav",
                                         "tetjis/data/se/police-whistle2.wav"};
     private Thread gameThread;
+    private static Clip bgm = GameSounds.createClip(GameSounds.class.getClassLoader().getResource(bgmPath));
+    static {
+        for ( int i = 0; i < sePathes.length; i++ ) {
+            se[i] = createClip(GameSounds.class.getClassLoader().getResource(sePathes[i]));
+        }
+    }
+
     private static HashMap<String, Integer> seMap= new HashMap<String, Integer>() {
         {
             put("start", 2);
@@ -37,8 +45,9 @@ public class GameSounds implements Runnable {
             put("all", 1);
         }
     };
+    
     public GameSounds() {
-
+        
     }
 
     public void setGameThread(Thread thread) {
@@ -76,13 +85,6 @@ public class GameSounds implements Runnable {
         bgm.stop();
 		bgm.flush();
 		bgm.setFramePosition(0);
-    }
-
-    public static void loadSounds() {
-        bgm = createClip(GameSounds.class.getClassLoader().getResource(bgmPath));
-        for ( int i = 0; i < sePathes.length; i++ ) {
-            se[i] = createClip(GameSounds.class.getClassLoader().getResource(sePathes[i]));
-        }
     }
 
     public static void playSounds(String s){
